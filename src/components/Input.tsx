@@ -1,13 +1,13 @@
-import React, { useState } from 'react';
+import React, { useState, ChangeEvent } from 'react';
 import './Input.css';
 
 interface InputProps {
-  label: string;
+  label?: string;
   value: string;
   type?: string;
   name?: string;
   id?: string;
-  onChange?: (value: string) => void;
+  onChange?: (event: ChangeEvent<HTMLInputElement>) => void;
   onFocus?: () => void;
 }
 
@@ -22,9 +22,9 @@ const Input: React.FC<InputProps> = ({
 }) => {
   const [focused, setFocused] = useState(false);
 
-  const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+  const handleInputChange = (event: ChangeEvent<HTMLInputElement>) => {
     if (onChange) {
-      onChange(e.target.value);
+      onChange(event);
     }
   };
 
