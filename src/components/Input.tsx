@@ -1,5 +1,4 @@
 import React, { useState, ChangeEvent } from 'react';
-import './Input.css';
 
 interface InputProps {
   label?: string;

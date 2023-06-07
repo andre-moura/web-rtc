@@ -1,10 +1,10 @@
 import React from 'react';
-import TextInput from './components/Input';
+import Register from './pages/Register';
 
 function App() {
   return (
     <>
-      <TextInput label='Username' value='' />
+    <Register />
     </>
   );
 }
