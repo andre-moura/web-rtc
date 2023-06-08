@@ -4,6 +4,7 @@ import '../assets/css/stylesheet.css';
 
 interface SidebarProps {
   conversations: Conversation[];
+  setOpenChatId: (id: string | null) => void;
 }
 
 interface Conversation {
@@ -11,61 +12,66 @@ interface Conversation {
   name: string;
   photo?: string;
   isGroup: boolean;
-  deleted?: boolean; // New property to track deleted conversations
+  deleted?: boolean;
 }
 
-const Sidebar: React.FC<SidebarProps> = ({ conversations }) => {
-  const [filteredConversations, setFilteredConversations] = useState<Conversation[]>(conversations);
-  const [openConversations, setOpenConversations] = useState<string[]>([]);
+const Sidebar: React.FC<SidebarProps> = ({ conversations, setOpenChatId }) => {
+  const [searchTerm, setSearchTerm] = useState('');
+  const [conversationsState, setConversationsState] = useState(conversations);
+  const [hoveredConversationId, setHoveredConversationId] = useState<string | null>(null);
 
-  const handleSearchChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-    const searchTerm = event.target.value.toLowerCase();
-    const filtered = conversations.filter(conversation =>
-      conversation.name.toLowerCase().includes(searchTerm)
-    );
-    setFilteredConversations(filtered);
+  const handleConversationClick = (id: string) => {
+    setOpenChatId(id);
   };
 
-  const handleConversationToggle = (id: string) => {
-    if (openConversations.includes(id)) {
-      setOpenConversations(prevOpenConversations =>
-        prevOpenConversations.filter(conversationId => conversationId !== id)
-      );
-    } else {
-      setOpenConversations(prevOpenConversations => [...prevOpenConversations, id]);
-    }
-  };
-
-  const handleConversationDelete = (id: string) => {
-    const updatedConversations = filteredConversations.map(conversation => {
+  const handleConversationClose = (event: React.MouseEvent, id: string) => {
+    event.stopPropagation();
+    const updatedConversations = conversationsState.map(conversation => {
       if (conversation.id === id) {
-        return { ...conversation, deleted: true };
+        return {
+          ...conversation,
+          deleted: true,
+        };
       }
       return conversation;
     });
-    setFilteredConversations(updatedConversations);
+    setOpenChatId(null);
+    setConversationsState(updatedConversations);
   };
+
+  const filteredConversations = conversationsState.filter(conversation => {
+    const name = conversation.name.toLowerCase();
+    return name.includes(searchTerm.toLowerCase());
+  });
 
   return (
     <div className="sidebar">
       <div className="sidebar-header">
-        <h3 onClick={() => handleConversationDelete('friends')}>Friends</h3>
+        <h3>Friends</h3>
       </div>
       <div className="sidebar-search">
-        <input type="text" placeholder="Search" onChange={handleSearchChange} />
+        <input
+          type="text"
+          value={searchTerm}
+          onChange={e => setSearchTerm(e.target.value)}
+          placeholder="Search conversations..."
+          className="search-bar"
+        />
       </div>
       <div className="conversations-list">
         {filteredConversations.map(conversation => {
           if (conversation.deleted) {
-            return null; // Skip rendering deleted conversations
+            return null;
           }
           return (
-            <div className="conversation" key={conversation.id}>
-              <div
-                className={`conversation-info ${openConversations.includes(conversation.id) ? 'open' : ''}`}
-                onMouseEnter={() => handleConversationToggle(conversation.id)}
-                onMouseLeave={() => handleConversationToggle(conversation.id)}
-              >
+            <div
+              className="conversation"
+              key={conversation.id}
+              onClick={() => handleConversationClick(conversation.id)}
+              onMouseEnter={() => setHoveredConversationId(conversation.id)}
+              onMouseLeave={() => setHoveredConversationId(null)}
+            >
+              <div className="conversation-info">
                 <div className="conversation-photo">
                   {conversation.photo ? (
                     <img src={conversation.photo} alt={conversation.name} />
@@ -74,11 +80,9 @@ const Sidebar: React.FC<SidebarProps> = ({ conversations }) => {
                   )}
                 </div>
                 <div className="conversation-name">{conversation.name}</div>
-                {openConversations.includes(conversation.id) && (
-                  <div className="conversation-close" onClick={() => handleConversationDelete(conversation.id)}>
-                    X
-                  </div>
-                )}
+                <div className="conversation-close" onClick={event => handleConversationClose(event, conversation.id)}>
+                  {hoveredConversationId === conversation.id ? 'X' : null}
+                </div>
               </div>
             </div>
           );
