@@ -1,0 +1,82 @@
+.sidebar {
+    width: 240px;
+    height: 100vh;
+    background-color: #36393f;
+    color: #fff;
+    padding: 16px;
+    box-sizing: border-box;
+}
+
+.sidebar-header {
+    margin-bottom: 16px;
+}
+
+.sidebar-header h3 {
+    font-size: 18px;
+    font-weight: bold;
+    margin: 0;
+}
+
+.sidebar-search input {
+    width: 100%;
+    padding: 8px;
+    border: none;
+    background-color: #202225;
+    color: #fff;
+    border-radius: 4px;
+    box-sizing: border-box;
+    margin-bottom: 16px;
+}
+
+.conversations-list {
+    overflow-y: auto;
+}
+
+.conversation {
+    display: flex;
+    align-items: center;
+    margin-bottom: 8px;
+    cursor: pointer;
+}
+
+.conversation-info {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    padding: 8px;
+    border-radius: 4px;
+    transition: background-color 0.3s ease;
+}
+
+.conversation-info:hover {
+    background-color: rgba(255, 255, 255, 0.1);
+}
+
+.conversation-info.open {
+    background-color: rgba(255, 255, 255, 0.1);
+}
+
+.conversation-photo {
+    width: 36px;
+    height: 36px;
+    overflow: hidden;
+    border-radius: 50%;
+    margin-right: 8px;
+}
+
+.conversation-photo img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.conversation-name {
+    font-size: 14px;
+    font-weight: bold;
+}
+
+.conversation-close {
+    margin-left: auto;
+    font-size: 16px;
+    cursor: pointer;
+}
