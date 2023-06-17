@@ -136,6 +136,24 @@ code {
     cursor: pointer;
 }
 
+.icon {
+    vertical-align: middle;
+    margin-right: 8px;
+}
+
+.sidebar-header h3 {
+    display: flex;
+    align-items: center;
+}
+
+.sidebar-header .icon {
+    font-size: 24px;
+}
+
+.sidebar-header:hover .icon {
+    background-color: rgba(255, 255, 255, 0.1);
+}
+
 /*Chat*/
 .chat {
     display: flex;
