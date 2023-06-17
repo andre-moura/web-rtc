@@ -139,6 +139,8 @@ code {
 .icon {
     vertical-align: middle;
     margin-right: 8px;
+    color: #949BA4;
+    cursor: pointer;
 }
 
 .sidebar-header h3 {
@@ -228,6 +230,44 @@ code {
     background-color: #5a6f8c;
 }
 
+.chat-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 16px;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+  }
+  
+  .chat-header h3 {
+    font-size: 18px;
+    font-weight: bold;
+    margin: 0;
+  }
+  
+  .icon-container {
+    display: flex;
+    align-items: center;
+  }
+  
+  .icon-container .icon {
+    font-size: 20px;
+    margin-right: 8px;
+    color: #949BA4;
+    cursor: pointer;
+  }
+  
+  .chat {
+    display: flex;
+    flex-direction: column;
+    width: calc(100% - 240px);
+    /* Adjust the width based on the sidebar width */
+    height: 100vh;
+    color: #fff;
+    margin-left: 240px;
+    /* Add margin to create space for the sidebar */
+  }
+
+  
 form {
     width: 784px;
 }
