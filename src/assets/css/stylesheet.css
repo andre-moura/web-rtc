@@ -1,10 +1,62 @@
+html, body {
+    width: 100%;
+    height: 100vh;
+    padding: 0;
+    margin: 0;
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
+        'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
+        sans-serif;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    /* background: linear-gradient(to right, #482a95, #5d36a8, #7245ba); */
+    background-color: #36393f;
+}
+
+code {
+    font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
+        monospace;
+}
+
 /*Sidebar*/
+
+.sidebar-header {
+    margin-bottom: 16px;
+    display: flex;
+    align-items: center;
+    cursor: pointer;
+}
+
+.sidebar-header:hover,
+.sidebar-header:hover h3 {
+    background-color: rgba(255, 255, 255, 0.1);
+    color: #fff;
+}
+
+.sidebar-header h3 {
+    font-size: 14px;
+    font-weight: bold;
+    margin: 0;
+    padding: 8px;
+    border-radius: 4px;
+    flex-grow: 1;
+}
+
+.conversation:hover .conversation-info {
+    background-color: rgba(255, 255, 255, 0.1);
+    color: #fff;
+}
+
+.conversation.open .conversation-info {
+    background-color: rgba(255, 255, 255, 0.1);
+    color: #fff;
+}
+
 .sidebar {
     width: 240px;
     height: 100vh;
     background-color: #292b2f;
     /* Adjust the background color */
-    color: #fff;
+    color: #949BA4;
     padding: 16px;
     box-sizing: border-box;
     float: left;
@@ -91,7 +143,6 @@
     width: calc(100% - 240px);
     /* Adjust the width based on the sidebar width */
     height: 100vh;
-    background-color: #36393f;
     color: #fff;
     margin-left: 240px;
     /* Add margin to create space for the sidebar */
@@ -157,4 +208,8 @@
 
 .chat-input button:hover {
     background-color: #5a6f8c;
+}
+
+form {
+    width: 784px;
 }

@@ -5,9 +5,10 @@ interface ButtonProps {
   disabled?: boolean;
   type?: 'button' | 'submit' | 'reset';
   children: string | JSX.Element;
+  className?: string; // Add className prop
 }
 
-const Button: React.FC<ButtonProps> = ({ onClick, disabled = false, children, type }) => {
+const Button: React.FC<ButtonProps> = ({ onClick, disabled = false, children, type, className }) => {
   const handleClick = () => {
     if (onClick) {
       onClick();
@@ -15,7 +16,7 @@ const Button: React.FC<ButtonProps> = ({ onClick, disabled = false, children, ty
   };
 
   return (
-    <button type={type} onClick={handleClick} disabled={disabled}>
+    <button type={type} onClick={handleClick} disabled={disabled} className={className}>
       {children}
     </button>
   );

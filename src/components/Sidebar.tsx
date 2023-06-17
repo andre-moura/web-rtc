@@ -1,6 +1,8 @@
 import React, { useState } from 'react';
 import DefaultImage from '../assets/images/dafault-image.jpg';
 import '../assets/css/stylesheet.css';
+import { FaUserFriends } from 'react-icons/fa';
+
 
 interface SidebarProps {
   conversations: Conversation[];
@@ -13,15 +15,23 @@ interface Conversation {
   photo?: string;
   isGroup: boolean;
   deleted?: boolean;
+  open?: boolean;
 }
 
 const Sidebar: React.FC<SidebarProps> = ({ conversations, setOpenChatId }) => {
   const [searchTerm, setSearchTerm] = useState('');
   const [conversationsState, setConversationsState] = useState(conversations);
   const [hoveredConversationId, setHoveredConversationId] = useState<string | null>(null);
+  const [hoveredFriends, setHoveredFriends] = useState(false); // New state for Friends hover
 
   const handleConversationClick = (id: string) => {
     setOpenChatId(id);
+    setConversationsState(prevState =>
+      prevState.map(conversation => ({
+        ...conversation,
+        open: conversation.id === id,
+      }))
+    );
   };
 
   const handleConversationClose = (event: React.MouseEvent, id: string) => {
@@ -39,6 +49,10 @@ const Sidebar: React.FC<SidebarProps> = ({ conversations, setOpenChatId }) => {
     setConversationsState(updatedConversations);
   };
 
+  const handleFriendsClick = () => {
+    setHoveredFriends(prevState => !prevState);
+  };
+
   const filteredConversations = conversationsState.filter(conversation => {
     const name = conversation.name.toLowerCase();
     return name.includes(searchTerm.toLowerCase());
@@ -46,8 +60,13 @@ const Sidebar: React.FC<SidebarProps> = ({ conversations, setOpenChatId }) => {
 
   return (
     <div className="sidebar">
-      <div className="sidebar-header">
-        <h3>Friends</h3>
+      <div
+        className={`sidebar-header ${hoveredFriends ? 'hover-effect' : ''}`}
+        onClick={handleFriendsClick}
+        onMouseEnter={() => setHoveredFriends(true)}
+        onMouseLeave={() => setHoveredFriends(false)}
+      >
+        <h3><FaUserFriends /> Friends</h3>
       </div>
       <div className="sidebar-search">
         <input
@@ -65,7 +84,7 @@ const Sidebar: React.FC<SidebarProps> = ({ conversations, setOpenChatId }) => {
           }
           return (
             <div
-              className="conversation"
+              className={`conversation ${conversation.open ? 'open' : ''}`}
               key={conversation.id}
               onClick={() => handleConversationClick(conversation.id)}
               onMouseEnter={() => setHoveredConversationId(conversation.id)}

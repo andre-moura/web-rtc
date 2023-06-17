@@ -1,6 +1,8 @@
 import React, { useState } from 'react';
 import Button from '../components/Button';
 import Input from '../components/Input';
+import { Link } from 'react-router-dom';
+
 
 interface LoginForm {
     username: string;
@@ -28,7 +30,7 @@ const Login: React.FC = () => {
 
     return (
         <>
-            <h2>Login</h2>
+            <h2>Welcome to Peer Link</h2>
             <form onSubmit={handleSubmit}>
                 <Input
                     label="Username"
@@ -46,7 +48,13 @@ const Login: React.FC = () => {
                     value={loginForm.password}
                     onChange={handleInputChange}
                 />
+                <div>
+                    <Link to="/">Forgort your password?</Link>
+                </div>
                 <Button type="submit">Login</Button>
+                <div>
+                    <Link to="/">Don't have an account?</Link>
+                </div>
             </form>
         </>
     );

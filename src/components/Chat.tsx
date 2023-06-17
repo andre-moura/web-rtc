@@ -30,12 +30,6 @@ const Chat: React.FC<ChatProps> = ({ conversationId }) => {
     setInputValue('');
   };
 
-  const generateMessageId = () => {
-    // Generate a unique ID for the message
-    // You can use a library like uuid or implement your own logic
-    return Math.random().toString(36).substr(2, 9);
-  };
-
   const conversation: Conversation = {
     id: '1',
     name: 'Friend 1',

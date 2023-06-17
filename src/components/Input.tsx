@@ -1,4 +1,5 @@
 import React, { useState, ChangeEvent } from 'react';
+import '../assets/css/stylesheet.css';
 
 interface InputProps {
   label?: string;
@@ -6,6 +7,8 @@ interface InputProps {
   type?: string;
   name?: string;
   id?: string;
+  className?: string;
+  placeholder?: string;
   onChange?: (event: ChangeEvent<HTMLInputElement>) => void;
   onFocus?: () => void;
 }
@@ -16,6 +19,8 @@ const Input: React.FC<InputProps> = ({
   type = 'text',
   name,
   id,
+  className,
+  placeholder,
   onChange,
   onFocus,
 }) => {
@@ -39,7 +44,10 @@ const Input: React.FC<InputProps> = ({
   };
 
   return (
-    <div className={`text-input ${focused ? 'focused' : ''}`}>
+    <div className={`input-container ${focused ? 'focused' : ''}`}>
+      <label htmlFor={id} className={`${value ? 'shrink' : ''}`}>
+        {label}
+      </label>
       <input
         type={type}
         value={value}
@@ -48,10 +56,10 @@ const Input: React.FC<InputProps> = ({
         onChange={handleInputChange}
         onFocus={handleFocus}
         onBlur={handleBlur}
+        autoComplete='off'
+        className={className}
+        placeholder={placeholder}
       />
-      <label htmlFor={id} className={`${value ? 'shrink' : ''}`}>
-        {label}
-      </label>
     </div>
   );
 };

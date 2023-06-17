@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import Button from '../components/Button';
 import Input from '../components/Input';
+import { Link } from 'react-router-dom';
 
 interface RegisterForm {
     email: string,
@@ -57,6 +58,9 @@ const Register: React.FC = () => {
                     onChange={handleInputChange}
                 />
                 <Button type="submit">Register</Button>
+                <div>
+                    <Link to="/">Already have an account?</Link>
+                </div>
             </form>
         </>
     );
