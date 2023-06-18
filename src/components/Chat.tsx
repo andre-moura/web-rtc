@@ -87,7 +87,6 @@ const Chat: React.FC<ChatProps> = ({ conversationId }) => {
           onChange={(e) => setInputValue(e.target.value)}
           placeholder="Type a message..."
         />
-        <button onClick={handleMessageSend}>Send</button>
       </div>
     </div>
   );

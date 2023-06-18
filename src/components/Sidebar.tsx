@@ -66,7 +66,6 @@ const Sidebar: React.FC<SidebarProps> = ({ conversations, setOpenChatId }) => {
         onMouseEnter={() => setHoveredFriends(true)}
         onMouseLeave={() => setHoveredFriends(false)}
       >
-        
         <h3>
           <FaUserFriends size={24} className="icon" /> Friends
         </h3>

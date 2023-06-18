@@ -12,6 +12,10 @@ sans-serif;
 background-color: #36393f;
 }
 
+input:focus {
+    outline: none;
+}
+
 code {
 font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
 monospace;
@@ -205,6 +209,7 @@ background-color: #202225;
 color: #fff;
 border-radius: 4px;
 margin-right: 8px;
+height: 25px;
 }
 
 .chat-input button {
